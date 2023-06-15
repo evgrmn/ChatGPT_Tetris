@@ -2795,568 +2795,345 @@ Copy code
 
 
     game_loop()
-    
+
 Now the Tetrimino rotates in the counter-clockwise direction when the up arrow key is pressed.
 
+**User**
 
-
-
-
-User
 Insuccess. Still rotates clockwise. Please correct.
-ChatGPT
+
+**ChatGPT**
+
 Apologies for the confusion. Here's the corrected code where the Tetrimino rotates counter-clockwise:
 
 python
 Copy code
-import pygame
-import random
 
-# Initialize Pygame
-pygame.init()
+    import pygame
+    import random
 
-# Define constants
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-GRID_SIZE = 30
-GRID_WIDTH = 10
-GRID_HEIGHT = 20
+    # Initialize Pygame
+    pygame.init()
 
-# Calculate the actual screen size based on the grid dimensions
-SCREEN_SIZE = (GRID_WIDTH * GRID_SIZE, GRID_HEIGHT * GRID_SIZE)
+    # Define constants
+    SCREEN_WIDTH = 800
+    SCREEN_HEIGHT = 600
+    GRID_SIZE = 30
+    GRID_WIDTH = 10
+    GRID_HEIGHT = 20
 
-# Define colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
+    # Calculate the actual screen size based on the grid dimensions
+    SCREEN_SIZE = (GRID_WIDTH * GRID_SIZE, GRID_HEIGHT * GRID_SIZE)
 
-# Create the game window
-screen = pygame.display.set_mode(SCREEN_SIZE)
-pygame.display.set_caption("Tetris")
+    # Define colors
+    BLACK = (0, 0, 0)
+    WHITE = (255, 255, 255)
+    RED = (255, 0, 0)
+    GREEN = (0, 255, 0)
+    BLUE = (0, 0, 255)
 
-clock = pygame.time.Clock()
+    # Create the game window
+    screen = pygame.display.set_mode(SCREEN_SIZE)
+    pygame.display.set_caption("Tetris")
 
-
-class Tetrimino:
-    def __init__(self):
-        self.shapes = [
-            [[1, 1, 1, 1]],
-            [[1, 1], [1, 1]],
-            [[1, 1, 1], [0, 1, 0]],
-            [[1, 1, 1], [1, 0, 0]],
-            [[1, 1, 1], [0, 0, 1]],
-            [[1, 1, 0], [0, 1, 1]],
-            [[0, 1, 1], [1, 1, 0]]
-        ]
-        self.shape = random.choice(self.shapes)
-        self.color = random.choice([RED, GREEN, BLUE])
-        self.x = (GRID_WIDTH - len(self.shape[0])) // 2
-        self.y = 0
-
-    def move_down(self):
-        self.y += 1
-
-    def move_left(self):
-        self.x -= 1
-
-    def move_right(self):
-        self.x += 1
-
-    def rotate(self):
-        self.shape = list(zip(*self.shape))[::-1]  # Rotate the shape counter-clockwise
-
-    def draw(self, surface):
-        for i in range(len(self.shape)):
-            for j in range(len(self.shape[i])):
-                if self.shape[i][j]:
-                    pygame.draw.rect(surface, self.color,
-                                     (self.x * GRID_SIZE + j * GRID_SIZE,
-                                      self.y * GRID_SIZE + i * GRID_SIZE,
-                                      GRID_SIZE, GRID_SIZE))
+    clock = pygame.time.Clock()
 
 
-class GameGrid:
-    def __init__(self):
-        self.grid = [[BLACK] * GRID_WIDTH for _ in range(GRID_HEIGHT)]
+    class Tetrimino:
+        def __init__(self):
+            self.shapes = [
+                [[1, 1, 1, 1]],
+                [[1, 1], [1, 1]],
+                [[1, 1, 1], [0, 1, 0]],
+                [[1, 1, 1], [1, 0, 0]],
+                [[1, 1, 1], [0, 0, 1]],
+                [[1, 1, 0], [0, 1, 1]],
+                [[0, 1, 1], [1, 1, 0]]
+            ]
+            self.shape = random.choice(self.shapes)
+            self.color = random.choice([RED, GREEN, BLUE])
+            self.x = (GRID_WIDTH - len(self.shape[0])) // 2
+            self.y = 0
 
-    def is_collision(self, tetrimino):
-        for i in range(len(tetrimino.shape)):
-            for j in range(len(tetrimino.shape[i])):
-                if tetrimino.shape[i][j] and (
-                        tetrimino.x + j < 0 or tetrimino.x + j >= GRID_WIDTH or
-                        tetrimino.y + i >= GRID_HEIGHT or
-                        self.grid[tetrimino.y + i][tetrimino.x + j] != BLACK
-                ):
-                    return True
-        return False
+        def move_down(self):
+            self.y += 1
 
-    def merge_tetrimino(self, tetrimino):
-        for i in range(len(tetrimino.shape)):
-            for j in range(len(tetrimino.shape[i])):
-                if tetrimino.shape[i][j]:
-                    self.grid[tetrimino.y + i][tetrimino.x + j] = tetrimino.color
+        def move_left(self):
+            self.x -= 1
 
-    def clear_rows(self):
-        full_rows = []
+        def move_right(self):
+            self.x += 1
+
+        def rotate(self):
+            self.shape = list(zip(*self.shape))[::-1]  # Rotate the shape counter-clockwise
+
+        def draw(self, surface):
+            for i in range(len(self.shape)):
+                for j in range(len(self.shape[i])):
+                    if self.shape[i][j]:
+                        pygame.draw.rect(surface, self.color,
+                                        (self.x * GRID_SIZE + j * GRID_SIZE,
+                                        self.y * GRID_SIZE + i * GRID_SIZE,
+                                        GRID_SIZE, GRID_SIZE))
+
+
+    class GameGrid:
+        def __init__(self):
+            self.grid = [[BLACK] * GRID_WIDTH for _ in range(GRID_HEIGHT)]
+
+        def is_collision(self, tetrimino):
+            for i in range(len(tetrimino.shape)):
+                for j in range(len(tetrimino.shape[i])):
+                    if tetrimino.shape[i][j] and (
+                            tetrimino.x + j < 0 or tetrimino.x + j >= GRID_WIDTH or
+                            tetrimino.y + i >= GRID_HEIGHT or
+                            self.grid[tetrimino.y + i][tetrimino.x + j] != BLACK
+                    ):
+                        return True
+            return False
+
+        def merge_tetrimino(self, tetrimino):
+            for i in range(len(tetrimino.shape)):
+                for j in range(len(tetrimino.shape[i])):
+                    if tetrimino.shape[i][j]:
+                        self.grid[tetrimino.y + i][tetrimino.x + j] = tetrimino.color
+
+        def clear_rows(self):
+            full_rows = []
+            for i in range(GRID_HEIGHT):
+                if all(cell != BLACK for cell in self.grid[i]):
+                    full_rows.append(i)
+
+            for row in full_rows:
+                del self.grid[row]
+                self.grid.insert(0, [BLACK] * GRID_WIDTH)
+
+
+    def draw_grid(surface, grid):
         for i in range(GRID_HEIGHT):
-            if all(cell != BLACK for cell in self.grid[i]):
-                full_rows.append(i)
-
-        for row in full_rows:
-            del self.grid[row]
-            self.grid.insert(0, [BLACK] * GRID_WIDTH)
+            for j in range(GRID_WIDTH):
+                pygame.draw.rect(surface, grid[i][j],
+                                (j * GRID_SIZE, i * GRID_SIZE, GRID_SIZE, GRID_SIZE), 0)
 
 
-def draw_grid(surface, grid):
-    for i in range(GRID_HEIGHT):
-        for j in range(GRID_WIDTH):
-            pygame.draw.rect(surface, grid[i][j],
-                             (j * GRID_SIZE, i * GRID_SIZE, GRID_SIZE, GRID_SIZE), 0)
+    def draw_game(surface, tetrimino, next_tetrimino, game_grid):
+        surface.fill(BLACK)
+        draw_grid(surface, game_grid.grid)
+        tetrimino.draw(surface)
+        next_tetrimino.draw(surface)
+        pygame.display.update()
 
 
-def draw_game(surface, tetrimino, next_tetrimino, game_grid):
-    surface.fill(BLACK)
-    draw_grid(surface, game_grid.grid)
-    tetrimino.draw(surface)
-    next_tetrimino.draw(surface)
-    pygame.display.update()
+    def game_loop():
+        tetrimino = Tetrimino()
+        next_tetrimino = Tetrimino()
+        game_grid = GameGrid()
 
+        timer_event = pygame.USEREVENT + 1
+        pygame.time.set_timer(timer_event, 1000)  # Set the timer event to occur every 1000 milliseconds (1 second)
 
-def game_loop():
-    tetrimino = Tetrimino()
-    next_tetrimino = Tetrimino()
-    game_grid = GameGrid()
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    return
 
-    timer_event = pygame.USEREVENT + 1
-    pygame.time.set_timer(timer_event, 1000)  # Set the timer event to occur every 1000 milliseconds (1 second)
-
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                return
-
-            if event.type == timer_event:
-                tetrimino.move_down()
-                if game_grid.is_collision(tetrimino):
-                    tetrimino.y -= 1
-                    game_grid.merge_tetrimino(tetrimino)
-                    game_grid.clear_rows()
-                    tetrimino = next_tetrimino
-                    next_tetrimino = Tetrimino()
-                    if game_grid.is_collision(next_tetrimino):
-                        print("Game Over")
-                        pygame.quit()
-                        return
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    tetrimino.move_left()
-                    if game_grid.is_collision(tetrimino):
-                        tetrimino.move_right()
-                elif event.key == pygame.K_RIGHT:
-                    tetrimino.move_right()
-                    if game_grid.is_collision(tetrimino):
-                        tetrimino.move_left()
-                elif event.key == pygame.K_DOWN:
+                if event.type == timer_event:
                     tetrimino.move_down()
                     if game_grid.is_collision(tetrimino):
                         tetrimino.y -= 1
                         game_grid.merge_tetrimino(tetrimino)
+                        game_grid.clear_rows()
                         tetrimino = next_tetrimino
                         next_tetrimino = Tetrimino()
                         if game_grid.is_collision(next_tetrimino):
                             print("Game Over")
                             pygame.quit()
                             return
-                elif event.key == pygame.K_UP:
-                    tetrimino.rotate()
-                    if game_grid.is_collision(tetrimino):
-                        tetrimino.rotate()
-                        tetrimino.rotate()
-                        tetrimino.rotate()
 
-        draw_game(screen, tetrimino, next_tetrimino, game_grid)
-        clock.tick(60)  # Limit the frame rate to 60 FPS
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:
+                        tetrimino.move_left()
+                        if game_grid.is_collision(tetrimino):
+                            tetrimino.move_right()
+                    elif event.key == pygame.K_RIGHT:
+                        tetrimino.move_right()
+                        if game_grid.is_collision(tetrimino):
+                            tetrimino.move_left()
+                    elif event.key == pygame.K_DOWN:
+                        tetrimino.move_down()
+                        if game_grid.is_collision(tetrimino):
+                            tetrimino.y -= 1
+                            game_grid.merge_tetrimino(tetrimino)
+                            tetrimino = next_tetrimino
+                            next_tetrimino = Tetrimino()
+                            if game_grid.is_collision(next_tetrimino):
+                                print("Game Over")
+                                pygame.quit()
+                                return
+                    elif event.key == pygame.K_UP:
+                        tetrimino.rotate()
+                        if game_grid.is_collision(tetrimino):
+                            tetrimino.rotate()
+                            tetrimino.rotate()
+                            tetrimino.rotate()
+
+            draw_game(screen, tetrimino, next_tetrimino, game_grid)
+            clock.tick(60)  # Limit the frame rate to 60 FPS
 
 
-game_loop()
+    game_loop()
+
 Now the Tetrimino rotates in the counter-clockwise direction when the up arrow key is pressed.
 
+**User**
 
-
-
-
-User
 Perfect. Let's continue upgrading the code. When I push the control button and do not release it, than let it behave like I pushed many times.
-ChatGPT
+
+**ChatGPT**
+
 To handle repeated key presses when a key is held down, you can utilize the pygame.KEYUP event to track when a key is released. Here's the updated code that handles repeated key presses:
 
 python
 Copy code
-import pygame
-import random
 
-# Initialize Pygame
-pygame.init()
+    import pygame
+    import random
 
-# Define constants
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-GRID_SIZE = 30
-GRID_WIDTH = 10
-GRID_HEIGHT = 20
+    # Initialize Pygame
+    pygame.init()
 
-# Calculate the actual screen size based on the grid dimensions
-SCREEN_SIZE = (GRID_WIDTH * GRID_SIZE, GRID_HEIGHT * GRID_SIZE)
+    # Define constants
+    SCREEN_WIDTH = 800
+    SCREEN_HEIGHT = 600
+    GRID_SIZE = 30
+    GRID_WIDTH = 10
+    GRID_HEIGHT = 20
 
-# Define colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
+    # Calculate the actual screen size based on the grid dimensions
+    SCREEN_SIZE = (GRID_WIDTH * GRID_SIZE, GRID_HEIGHT * GRID_SIZE)
 
-# Create the game window
-screen = pygame.display.set_mode(SCREEN_SIZE)
-pygame.display.set_caption("Tetris")
+    # Define colors
+    BLACK = (0, 0, 0)
+    WHITE = (255, 255, 255)
+    RED = (255, 0, 0)
+    GREEN = (0, 255, 0)
+    BLUE = (0, 0, 255)
 
-clock = pygame.time.Clock()
+    # Create the game window
+    screen = pygame.display.set_mode(SCREEN_SIZE)
+    pygame.display.set_caption("Tetris")
 
-
-class Tetrimino:
-    def __init__(self):
-        self.shapes = [
-            [[1, 1, 1, 1]],
-            [[1, 1], [1, 1]],
-            [[1, 1, 1], [0, 1, 0]],
-            [[1, 1, 1], [1, 0, 0]],
-            [[1, 1, 1], [0, 0, 1]],
-            [[1, 1, 0], [0, 1, 1]],
-            [[0, 1, 1], [1, 1, 0]]
-        ]
-        self.shape = random.choice(self.shapes)
-        self.color = random.choice([RED, GREEN, BLUE])
-        self.x = (GRID_WIDTH - len(self.shape[0])) // 2
-        self.y = 0
-
-    def move_down(self):
-        self.y += 1
-
-    def move_left(self):
-        self.x -= 1
-
-    def move_right(self):
-        self.x += 1
-
-    def rotate(self):
-        self.shape = list(zip(*self.shape[::-1]))  # Rotate the shape counter-clockwise
-
-    def draw(self, surface):
-        for i in range(len(self.shape)):
-            for j in range(len(self.shape[i])):
-                if self.shape[i][j]:
-                    pygame.draw.rect(surface, self.color,
-                                     (self.x * GRID_SIZE + j * GRID_SIZE,
-                                      self.y * GRID_SIZE + i * GRID_SIZE,
-                                      GRID_SIZE, GRID_SIZE))
+    clock = pygame.time.Clock()
 
 
-class GameGrid:
-    def __init__(self):
-        self.grid = [[BLACK] * GRID_WIDTH for _ in range(GRID_HEIGHT)]
+    class Tetrimino:
+        def __init__(self):
+            self.shapes = [
+                [[1, 1, 1, 1]],
+                [[1, 1], [1, 1]],
+                [[1, 1, 1], [0, 1, 0]],
+                [[1, 1, 1], [1, 0, 0]],
+                [[1, 1, 1], [0, 0, 1]],
+                [[1, 1, 0], [0, 1, 1]],
+                [[0, 1, 1], [1, 1, 0]]
+            ]
+            self.shape = random.choice(self.shapes)
+            self.color = random.choice([RED, GREEN, BLUE])
+            self.x = (GRID_WIDTH - len(self.shape[0])) // 2
+            self.y = 0
 
-    def is_collision(self, tetrimino):
-        for i in range(len(tetrimino.shape)):
-            for j in range(len(tetrimino.shape[i])):
-                if tetrimino.shape[i][j] and (
-                        tetrimino.x + j < 0 or tetrimino.x + j >= GRID_WIDTH or
-                        tetrimino.y + i >= GRID_HEIGHT or
-                        self.grid[tetrimino.y + i][tetrimino.x + j] != BLACK
-                ):
-                    return True
-        return False
+        def move_down(self):
+            self.y += 1
 
-    def merge_tetrimino(self, tetrimino):
-        for i in range(len(tetrimino.shape)):
-            for j in range(len(tetrimino.shape[i])):
-                if tetrimino.shape[i][j]:
-                    self.grid[tetrimino.y + i][tetrimino.x + j] = tetrimino.color
+        def move_left(self):
+            self.x -= 1
 
-    def clear_rows(self):
-        full_rows = []
+        def move_right(self):
+            self.x += 1
+
+        def rotate(self):
+            self.shape = list(zip(*self.shape[::-1]))  # Rotate the shape counter-clockwise
+
+        def draw(self, surface):
+            for i in range(len(self.shape)):
+                for j in range(len(self.shape[i])):
+                    if self.shape[i][j]:
+                        pygame.draw.rect(surface, self.color,
+                                        (self.x * GRID_SIZE + j * GRID_SIZE,
+                                        self.y * GRID_SIZE + i * GRID_SIZE,
+                                        GRID_SIZE, GRID_SIZE))
+
+
+    class GameGrid:
+        def __init__(self):
+            self.grid = [[BLACK] * GRID_WIDTH for _ in range(GRID_HEIGHT)]
+
+        def is_collision(self, tetrimino):
+            for i in range(len(tetrimino.shape)):
+                for j in range(len(tetrimino.shape[i])):
+                    if tetrimino.shape[i][j] and (
+                            tetrimino.x + j < 0 or tetrimino.x + j >= GRID_WIDTH or
+                            tetrimino.y + i >= GRID_HEIGHT or
+                            self.grid[tetrimino.y + i][tetrimino.x + j] != BLACK
+                    ):
+                        return True
+            return False
+
+        def merge_tetrimino(self, tetrimino):
+            for i in range(len(tetrimino.shape)):
+                for j in range(len(tetrimino.shape[i])):
+                    if tetrimino.shape[i][j]:
+                        self.grid[tetrimino.y + i][tetrimino.x + j] = tetrimino.color
+
+        def clear_rows(self):
+            full_rows = []
+            for i in range(GRID_HEIGHT):
+                if all(cell != BLACK for cell in self.grid[i]):
+                    full_rows.append(i)
+
+            for row in full_rows:
+                del self.grid[row]
+                self.grid.insert(0, [BLACK] * GRID_WIDTH)
+
+
+    def draw_grid(surface, grid):
         for i in range(GRID_HEIGHT):
-            if all(cell != BLACK for cell in self.grid[i]):
-                full_rows.append(i)
-
-        for row in full_rows:
-            del self.grid[row]
-            self.grid.insert(0, [BLACK] * GRID_WIDTH)
+            for j in range(GRID_WIDTH):
+                pygame.draw.rect(surface, grid[i][j],
+                                (j * GRID_SIZE, i * GRID_SIZE, GRID_SIZE, GRID_SIZE), 0)
 
 
-def draw_grid(surface, grid):
-    for i in range(GRID_HEIGHT):
-        for j in range(GRID_WIDTH):
-            pygame.draw.rect(surface, grid[i][j],
-                             (j * GRID_SIZE, i * GRID_SIZE, GRID_SIZE, GRID_SIZE), 0)
+    def draw_game(surface, tetrimino, next_tetrimino, game_grid):
+        surface.fill(BLACK)
+        draw_grid(surface, game_grid.grid)
+        tetrimino.draw(surface)
+        next_tetrimino.draw(surface)
+        pygame.display.update()
 
 
-def draw_game(surface, tetrimino, next_tetrimino, game_grid):
-    surface.fill(BLACK)
-    draw_grid(surface, game_grid.grid)
-    tetrimino.draw(surface)
-    next_tetrimino.draw(surface)
-    pygame.display.update()
+    def game_loop():
+        tetrimino = Tetrimino()
+        next_tetrimino = Tetrimino()
+        game_grid = GameGrid()
 
+        timer_event = pygame.USEREVENT + 1
+        pygame.time.set_timer(timer_event, 1000)  # Set the timer event to occur every 1000 milliseconds (1 second)
 
-def game_loop():
-    tetrimino = Tetrimino()
-    next_tetrimino = Tetrimino()
-    game_grid = GameGrid()
+        keys_down = set()
 
-    timer_event = pygame.USEREVENT + 1
-    pygame.time.set_timer(timer_event, 1000)  # Set the timer event to occur every 1000 milliseconds (1 second)
-
-    keys_down = set()
-
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                return
-
-            if event.type == timer_event:
-                tetrimino.move_down()
-                if game_grid.is_collision(tetrimino):
-                    tetrimino.y -= 1
-                    game_grid.merge_tetrimino(tetrimino)
-                    game_grid.clear_rows()
-                    tetrimino = next_tetrimino
-                    next_tetrimino = Tetrimino()
-                    if game_grid.is_collision(next_tetrimino):
-                        print("Game Over")
-                        pygame.quit()
-                        return
-
-            if event.type == pygame.KEYDOWN:
-                keys_down.add(event.key)
-
-            if event.type == pygame.KEYUP:
-                if event.key in keys_down:
-                    keys_down.remove(event.key)
-
-        if pygame.K_LEFT in keys_down:
-            tetrimino.move_left()
-            if game_grid.is_collision(tetrimino):
-                tetrimino.move_right()
-
-        if pygame.K_RIGHT in keys_down:
-            tetrimino.move_right()
-            if game_grid.is_collision(tetrimino):
-                tetrimino.move_left()
-
-        if pygame.K_DOWN in keys_down:
-            tetrimino.move_down()
-            if game_grid.is_collision(tetrimino):
-                tetrimino.y -= 1
-                game_grid.merge_tetrimino(tetrimino)
-                tetrimino = next_tetrimino
-                next_tetrimino = Tetrimino()
-                if game_grid.is_collision(next_tetrimino):
-                    print("Game Over")
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
                     pygame.quit()
                     return
 
-        if pygame.K_UP in keys_down:
-            tetrimino.rotate()
-            if game_grid.is_collision(tetrimino):
-                tetrimino.rotate()
-                tetrimino.rotate()
-                tetrimino.rotate()
-
-        draw_game(screen, tetrimino, next_tetrimino, game_grid)
-        clock.tick(60)  # Limit the frame rate to 60 FPS
-
-
-game_loop()
-Now the Tetrimino rotates in the counter-clockwise direction when the up arrow key is pressed, and it handles repeated key presses correctly.
-
-
-
-
-
-User
-Please increase repeated key presses interval to 250 ms.
-ChatGPT
-To increase the interval between repeated key presses, you can use a timer event to control the movement of the Tetrimino. Here's the updated code with the increased interval:
-
-python
-Copy code
-import pygame
-import random
-
-# Initialize Pygame
-pygame.init()
-
-# Define constants
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-GRID_SIZE = 30
-GRID_WIDTH = 10
-GRID_HEIGHT = 20
-
-# Calculate the actual screen size based on the grid dimensions
-SCREEN_SIZE = (GRID_WIDTH * GRID_SIZE, GRID_HEIGHT * GRID_SIZE)
-
-# Define colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-
-# Create the game window
-screen = pygame.display.set_mode(SCREEN_SIZE)
-pygame.display.set_caption("Tetris")
-
-clock = pygame.time.Clock()
-
-class Tetrimino:
-    def __init__(self):
-        self.shapes = [
-            [[1, 1, 1, 1]],
-            [[1, 1], [1, 1]],
-            [[1, 1, 1], [0, 1, 0]],
-            [[1, 1, 1], [1, 0, 0]],
-            [[1, 1, 1], [0, 0, 1]],
-            [[1, 1, 0], [0, 1, 1]],
-            [[0, 1, 1], [1, 1, 0]]
-        ]
-        self.shape = random.choice(self.shapes)
-        self.color = random.choice([RED, GREEN, BLUE])
-        self.x = (GRID_WIDTH - len(self.shape[0])) // 2
-        self.y = 0
-
-    def move_down(self):
-        self.y += 1
-
-    def move_left(self):
-        self.x -= 1
-
-    def move_right(self):
-        self.x += 1
-
-    def rotate(self):
-        self.shape = list(zip(*self.shape[::-1]))  # Rotate the shape counter-clockwise
-
-    def draw(self, surface):
-        for i in range(len(self.shape)):
-            for j in range(len(self.shape[i])):
-                if self.shape[i][j]:
-                    pygame.draw.rect(surface, self.color,
-                                     (self.x * GRID_SIZE + j * GRID_SIZE,
-                                      self.y * GRID_SIZE + i * GRID_SIZE,
-                                      GRID_SIZE, GRID_SIZE))
-
-
-class GameGrid:
-    def __init__(self):
-        self.grid = [[BLACK] * GRID_WIDTH for _ in range(GRID_HEIGHT)]
-
-    def is_collision(self, tetrimino):
-        for i in range(len(tetrimino.shape)):
-            for j in range(len(tetrimino.shape[i])):
-                if tetrimino.shape[i][j] and (
-                        tetrimino.x + j < 0 or tetrimino.x + j >= GRID_WIDTH or
-                        tetrimino.y + i >= GRID_HEIGHT or
-                        self.grid[tetrimino.y + i][tetrimino.x + j] != BLACK
-                ):
-                    return True
-        return False
-
-    def merge_tetrimino(self, tetrimino):
-        for i in range(len(tetrimino.shape)):
-            for j in range(len(tetrimino.shape[i])):
-                if tetrimino.shape[i][j]:
-                    self.grid[tetrimino.y + i][tetrimino.x + j] = tetrimino.color
-
-    def clear_rows(self):
-        full_rows = []
-        for i in range(GRID_HEIGHT):
-            if all(cell != BLACK for cell in self.grid[i]):
-                full_rows.append(i)
-
-        for row in full_rows:
-            del self.grid[row]
-            self.grid.insert(0, [BLACK] * GRID_WIDTH)
-
-
-def draw_grid(surface, grid):
-    for i in range(GRID_HEIGHT):
-        for j in range(GRID_WIDTH):
-            pygame.draw.rect(surface, grid[i][j],
-                             (j * GRID_SIZE, i * GRID_SIZE, GRID_SIZE, GRID_SIZE), 0)
-
-
-def draw_game(surface, tetrimino, next_tetrimino, game_grid):
-    surface.fill(BLACK)
-    draw_grid(surface, game_grid.grid)
-    tetrimino.draw(surface)
-    next_tetrimino.draw(surface)
-    pygame.display.update()
-
-
-def game_loop():
-    tetrimino = Tetrimino()
-    next_tetrimino = Tetrimino()
-    game_grid = GameGrid()
-
-    tetrimino_interval = 1000  # Initial interval between tetrimino movements in milliseconds
-    tetrimino_timer = pygame.USEREVENT + 1
-    pygame.time.set_timer(tetrimino_timer, tetrimino_interval)
-
-    keys_down = set()
-    key_repeat_interval = 250  # Interval between repeated key presses in milliseconds
-    key_repeat_timer = pygame.USEREVENT + 2
-    pygame.time.set_timer(key_repeat_timer, key_repeat_interval)
-
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                return
-
-            if event.type == tetrimino_timer:
-                tetrimino.move_down()
-                if game_grid.is_collision(tetrimino):
-                    tetrimino.y -= 1
-                    game_grid.merge_tetrimino(tetrimino)
-                    game_grid.clear_rows()
-                    tetrimino = next_tetrimino
-                    next_tetrimino = Tetrimino()
-                    if game_grid.is_collision(next_tetrimino):
-                        print("Game Over")
-                        pygame.quit()
-                        return
-
-            if event.type == key_repeat_timer:
-                if pygame.K_LEFT in keys_down:
-                    tetrimino.move_left()
-                    if game_grid.is_collision(tetrimino):
-                        tetrimino.move_right()
-
-                if pygame.K_RIGHT in keys_down:
-                    tetrimino.move_right()
-                    if game_grid.is_collision(tetrimino):
-                        tetrimino.move_left()
-
-                if pygame.K_DOWN in keys_down:
+                if event.type == timer_event:
                     tetrimino.move_down()
                     if game_grid.is_collision(tetrimino):
                         tetrimino.y -= 1
                         game_grid.merge_tetrimino(tetrimino)
+                        game_grid.clear_rows()
                         tetrimino = next_tetrimino
                         next_tetrimino = Tetrimino()
                         if game_grid.is_collision(next_tetrimino):
@@ -3364,185 +3141,28 @@ def game_loop():
                             pygame.quit()
                             return
 
-        if pygame.key.get_focused():
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_LEFT]:
-                keys_down.add(pygame.K_LEFT)
-            if keys[pygame.K_RIGHT]:
-                keys_down.add(pygame.K_RIGHT)
-            if keys[pygame.K_DOWN]:
-                keys_down.add(pygame.K_DOWN)
+                if event.type == pygame.KEYDOWN:
+                    keys_down.add(event.key)
 
-        if pygame.K_LEFT not in keys_down:
-            keys_down.discard(pygame.K_LEFT)
-        if pygame.K_RIGHT not in keys_down:
-            keys_down.discard(pygame.K_RIGHT)
-        if pygame.K_DOWN not in keys_down:
-            keys_down.discard(pygame.K_DOWN)
+                if event.type == pygame.KEYUP:
+                    if event.key in keys_down:
+                        keys_down.remove(event.key)
 
-        if pygame.K_UP in keys_down:
-            tetrimino.rotate()
-            if game_grid.is_collision(tetrimino):
-                tetrimino.rotate()
-                tetrimino.rotate()
-                tetrimino.rotate()
+            if pygame.K_LEFT in keys_down:
+                tetrimino.move_left()
+                if game_grid.is_collision(tetrimino):
+                    tetrimino.move_right()
 
-        draw_game(screen, tetrimino, next_tetrimino, game_grid)
-        clock.tick(60)
+            if pygame.K_RIGHT in keys_down:
+                tetrimino.move_right()
+                if game_grid.is_collision(tetrimino):
+                    tetrimino.move_left()
 
-
-# Run the game
-game_loop()
-This updated code should rotate the Tetrimino counter-clockwise when the "Up" arrow key is pressed.
-
-
-
-
-
-User
-Please cancel the last update.
-ChatGPT
-I apologize for the confusion. Here's the updated code where the Tetrimino rotates counter-clockwise:
-
-python
-Copy code
-import pygame
-import random
-
-# Initialize Pygame
-pygame.init()
-
-# Define constants
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-GRID_SIZE = 30
-GRID_WIDTH = 10
-GRID_HEIGHT = 20
-
-# Calculate the actual screen size based on the grid dimensions
-SCREEN_SIZE = (GRID_WIDTH * GRID_SIZE, GRID_HEIGHT * GRID_SIZE)
-
-# Define colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-
-# Create the game window
-screen = pygame.display.set_mode(SCREEN_SIZE)
-pygame.display.set_caption("Tetris")
-
-clock = pygame.time.Clock()
-
-class Tetrimino:
-    def __init__(self):
-        self.shapes = [
-            [[1, 1, 1, 1]],
-            [[1, 1], [1, 1]],
-            [[1, 1, 1], [0, 1, 0]],
-            [[1, 1, 1], [1, 0, 0]],
-            [[1, 1, 1], [0, 0, 1]],
-            [[1, 1, 0], [0, 1, 1]],
-            [[0, 1, 1], [1, 1, 0]]
-        ]
-        self.shape = random.choice(self.shapes)
-        self.color = random.choice([RED, GREEN, BLUE])
-        self.x = (GRID_WIDTH - len(self.shape[0])) // 2
-        self.y = 0
-
-    def move_down(self):
-        self.y += 1
-
-    def move_left(self):
-        self.x -= 1
-
-    def move_right(self):
-        self.x += 1
-
-    def rotate(self):
-        self.shape = list(zip(*self.shape[::-1]))[::-1]  # Rotate the shape counter-clockwise
-
-    def draw(self, surface):
-        for i in range(len(self.shape)):
-            for j in range(len(self.shape[i])):
-                if self.shape[i][j]:
-                    pygame.draw.rect(surface, self.color,
-                                     (self.x * GRID_SIZE + j * GRID_SIZE,
-                                      self.y * GRID_SIZE + i * GRID_SIZE,
-                                      GRID_SIZE, GRID_SIZE))
-
-
-class GameGrid:
-    def __init__(self):
-        self.grid = [[BLACK] * GRID_WIDTH for _ in range(GRID_HEIGHT)]
-
-    def is_collision(self, tetrimino):
-        for i in range(len(tetrimino.shape)):
-            for j in range(len(tetrimino.shape[i])):
-                if tetrimino.shape[i][j] and (
-                        tetrimino.x + j < 0 or tetrimino.x + j >= GRID_WIDTH or
-                        tetrimino.y + i >= GRID_HEIGHT or
-                        self.grid[tetrimino.y + i][tetrimino.x + j] != BLACK
-                ):
-                    return True
-        return False
-
-    def merge_tetrimino(self, tetrimino):
-        for i in range(len(tetrimino.shape)):
-            for j in range(len(tetrimino.shape[i])):
-                if tetrimino.shape[i][j]:
-                    self.grid[tetrimino.y + i][tetrimino.x + j] = tetrimino.color
-
-    def clear_rows(self):
-        full_rows = []
-        for i in range(GRID_HEIGHT):
-            if all(cell != BLACK for cell in self.grid[i]):
-                full_rows.append(i)
-
-        for row in full_rows:
-            del self.grid[row]
-            self.grid.insert(0, [BLACK] * GRID_WIDTH)
-
-
-def draw_grid(surface, grid):
-    for i in range(GRID_HEIGHT):
-        for j in range(GRID_WIDTH):
-            pygame.draw.rect(surface, grid[i][j],
-                             (j * GRID_SIZE, i * GRID_SIZE, GRID_SIZE, GRID_SIZE), 0)
-
-
-def draw_game(surface, tetrimino, next_tetrimino, game_grid):
-    surface.fill(BLACK)
-    draw_grid(surface, game_grid.grid)
-    tetrimino.draw(surface)
-    next_tetrimino.draw(surface)
-    pygame.display.update()
-
-
-def game_loop():
-    tetrimino = Tetrimino()
-    next_tetrimino = Tetrimino()
-    game_grid = GameGrid()
-
-    tetrimino_interval = 1000  # Initial interval between tetrimino movements in milliseconds
-    tetrimino_timer = pygame.USEREVENT + 1
-    pygame.time.set_timer(tetrimino_timer, tetrimino_interval)
-
-    keys_down = set()
-
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                return
-
-            if event.type == tetrimino_timer:
+            if pygame.K_DOWN in keys_down:
                 tetrimino.move_down()
                 if game_grid.is_collision(tetrimino):
                     tetrimino.y -= 1
                     game_grid.merge_tetrimino(tetrimino)
-                    game_grid.clear_rows()
                     tetrimino = next_tetrimino
                     next_tetrimino = Tetrimino()
                     if game_grid.is_collision(next_tetrimino):
@@ -3550,56 +3170,440 @@ def game_loop():
                         pygame.quit()
                         return
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    keys_down.add(pygame.K_LEFT)
-                elif event.key == pygame.K_RIGHT:
-                    keys_down.add(pygame.K_RIGHT)
-                elif event.key == pygame.K_DOWN:
-                    keys_down.add(pygame.K_DOWN)
-                elif event.key == pygame.K_UP:
+            if pygame.K_UP in keys_down:
+                tetrimino.rotate()
+                if game_grid.is_collision(tetrimino):
                     tetrimino.rotate()
-                    if game_grid.is_collision(tetrimino):
-                        tetrimino.rotate()
-                        tetrimino.rotate()
-                        tetrimino.rotate()
+                    tetrimino.rotate()
+                    tetrimino.rotate()
 
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT:
-                    keys_down.discard(pygame.K_LEFT)
-                elif event.key == pygame.K_RIGHT:
-                    keys_down.discard(pygame.K_RIGHT)
-                elif event.key == pygame.K_DOWN:
-                    keys_down.discard(pygame.K_DOWN)
+            draw_game(screen, tetrimino, next_tetrimino, game_grid)
+            clock.tick(60)  # Limit the frame rate to 60 FPS
 
-        if pygame.K_LEFT in keys_down:
-            tetrimino.move_left()
-            if game_grid.is_collision(tetrimino):
-                tetrimino.move_right()
 
-        if pygame.K_RIGHT in keys_down:
-            tetrimino.move_right()
-            if game_grid.is_collision(tetrimino):
-                tetrimino.move_left()
+    game_loop()
 
-        if pygame.K_DOWN in keys_down:
-            tetrimino.move_down()
-            if game_grid.is_collision(tetrimino):
-                tetrimino.y -= 1
-                game_grid.merge_tetrimino(tetrimino)
-                tetrimino = next_tetrimino
-                next_tetrimino = Tetrimino()
-                if game_grid.is_collision(next_tetrimino):
-                    print("Game Over")
+Now the Tetrimino rotates in the counter-clockwise direction when the up arrow key is pressed, and it handles repeated key presses correctly.
+
+**User**
+
+Please increase repeated key presses interval to 250 ms.
+
+**ChatGPT**
+
+To increase the interval between repeated key presses, you can use a timer event to control the movement of the Tetrimino. Here's the updated code with the increased interval:
+
+python
+Copy code
+
+    import pygame
+    import random
+
+    # Initialize Pygame
+    pygame.init()
+
+    # Define constants
+    SCREEN_WIDTH = 800
+    SCREEN_HEIGHT = 600
+    GRID_SIZE = 30
+    GRID_WIDTH = 10
+    GRID_HEIGHT = 20
+
+    # Calculate the actual screen size based on the grid dimensions
+    SCREEN_SIZE = (GRID_WIDTH * GRID_SIZE, GRID_HEIGHT * GRID_SIZE)
+
+    # Define colors
+    BLACK = (0, 0, 0)
+    WHITE = (255, 255, 255)
+    RED = (255, 0, 0)
+    GREEN = (0, 255, 0)
+    BLUE = (0, 0, 255)
+
+    # Create the game window
+    screen = pygame.display.set_mode(SCREEN_SIZE)
+    pygame.display.set_caption("Tetris")
+
+    clock = pygame.time.Clock()
+
+    class Tetrimino:
+        def __init__(self):
+            self.shapes = [
+                [[1, 1, 1, 1]],
+                [[1, 1], [1, 1]],
+                [[1, 1, 1], [0, 1, 0]],
+                [[1, 1, 1], [1, 0, 0]],
+                [[1, 1, 1], [0, 0, 1]],
+                [[1, 1, 0], [0, 1, 1]],
+                [[0, 1, 1], [1, 1, 0]]
+            ]
+            self.shape = random.choice(self.shapes)
+            self.color = random.choice([RED, GREEN, BLUE])
+            self.x = (GRID_WIDTH - len(self.shape[0])) // 2
+            self.y = 0
+
+        def move_down(self):
+            self.y += 1
+
+        def move_left(self):
+            self.x -= 1
+
+        def move_right(self):
+            self.x += 1
+
+        def rotate(self):
+            self.shape = list(zip(*self.shape[::-1]))  # Rotate the shape counter-clockwise
+
+        def draw(self, surface):
+            for i in range(len(self.shape)):
+                for j in range(len(self.shape[i])):
+                    if self.shape[i][j]:
+                        pygame.draw.rect(surface, self.color,
+                                        (self.x * GRID_SIZE + j * GRID_SIZE,
+                                        self.y * GRID_SIZE + i * GRID_SIZE,
+                                        GRID_SIZE, GRID_SIZE))
+
+
+    class GameGrid:
+        def __init__(self):
+            self.grid = [[BLACK] * GRID_WIDTH for _ in range(GRID_HEIGHT)]
+
+        def is_collision(self, tetrimino):
+            for i in range(len(tetrimino.shape)):
+                for j in range(len(tetrimino.shape[i])):
+                    if tetrimino.shape[i][j] and (
+                            tetrimino.x + j < 0 or tetrimino.x + j >= GRID_WIDTH or
+                            tetrimino.y + i >= GRID_HEIGHT or
+                            self.grid[tetrimino.y + i][tetrimino.x + j] != BLACK
+                    ):
+                        return True
+            return False
+
+        def merge_tetrimino(self, tetrimino):
+            for i in range(len(tetrimino.shape)):
+                for j in range(len(tetrimino.shape[i])):
+                    if tetrimino.shape[i][j]:
+                        self.grid[tetrimino.y + i][tetrimino.x + j] = tetrimino.color
+
+        def clear_rows(self):
+            full_rows = []
+            for i in range(GRID_HEIGHT):
+                if all(cell != BLACK for cell in self.grid[i]):
+                    full_rows.append(i)
+
+            for row in full_rows:
+                del self.grid[row]
+                self.grid.insert(0, [BLACK] * GRID_WIDTH)
+
+
+    def draw_grid(surface, grid):
+        for i in range(GRID_HEIGHT):
+            for j in range(GRID_WIDTH):
+                pygame.draw.rect(surface, grid[i][j],
+                                (j * GRID_SIZE, i * GRID_SIZE, GRID_SIZE, GRID_SIZE), 0)
+
+
+    def draw_game(surface, tetrimino, next_tetrimino, game_grid):
+        surface.fill(BLACK)
+        draw_grid(surface, game_grid.grid)
+        tetrimino.draw(surface)
+        next_tetrimino.draw(surface)
+        pygame.display.update()
+
+
+    def game_loop():
+        tetrimino = Tetrimino()
+        next_tetrimino = Tetrimino()
+        game_grid = GameGrid()
+
+        tetrimino_interval = 1000  # Initial interval between tetrimino movements in milliseconds
+        tetrimino_timer = pygame.USEREVENT + 1
+        pygame.time.set_timer(tetrimino_timer, tetrimino_interval)
+
+        keys_down = set()
+        key_repeat_interval = 250  # Interval between repeated key presses in milliseconds
+        key_repeat_timer = pygame.USEREVENT + 2
+        pygame.time.set_timer(key_repeat_timer, key_repeat_interval)
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
                     pygame.quit()
                     return
 
-        draw_game(screen, tetrimino, next_tetrimino, game_grid)
-        clock.tick(60)
+                if event.type == tetrimino_timer:
+                    tetrimino.move_down()
+                    if game_grid.is_collision(tetrimino):
+                        tetrimino.y -= 1
+                        game_grid.merge_tetrimino(tetrimino)
+                        game_grid.clear_rows()
+                        tetrimino = next_tetrimino
+                        next_tetrimino = Tetrimino()
+                        if game_grid.is_collision(next_tetrimino):
+                            print("Game Over")
+                            pygame.quit()
+                            return
+
+                if event.type == key_repeat_timer:
+                    if pygame.K_LEFT in keys_down:
+                        tetrimino.move_left()
+                        if game_grid.is_collision(tetrimino):
+                            tetrimino.move_right()
+
+                    if pygame.K_RIGHT in keys_down:
+                        tetrimino.move_right()
+                        if game_grid.is_collision(tetrimino):
+                            tetrimino.move_left()
+
+                    if pygame.K_DOWN in keys_down:
+                        tetrimino.move_down()
+                        if game_grid.is_collision(tetrimino):
+                            tetrimino.y -= 1
+                            game_grid.merge_tetrimino(tetrimino)
+                            tetrimino = next_tetrimino
+                            next_tetrimino = Tetrimino()
+                            if game_grid.is_collision(next_tetrimino):
+                                print("Game Over")
+                                pygame.quit()
+                                return
+
+            if pygame.key.get_focused():
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_LEFT]:
+                    keys_down.add(pygame.K_LEFT)
+                if keys[pygame.K_RIGHT]:
+                    keys_down.add(pygame.K_RIGHT)
+                if keys[pygame.K_DOWN]:
+                    keys_down.add(pygame.K_DOWN)
+
+            if pygame.K_LEFT not in keys_down:
+                keys_down.discard(pygame.K_LEFT)
+            if pygame.K_RIGHT not in keys_down:
+                keys_down.discard(pygame.K_RIGHT)
+            if pygame.K_DOWN not in keys_down:
+                keys_down.discard(pygame.K_DOWN)
+
+            if pygame.K_UP in keys_down:
+                tetrimino.rotate()
+                if game_grid.is_collision(tetrimino):
+                    tetrimino.rotate()
+                    tetrimino.rotate()
+                    tetrimino.rotate()
+
+            draw_game(screen, tetrimino, next_tetrimino, game_grid)
+            clock.tick(60)
 
 
-# Run the game
-game_loop()
+    # Run the game
+    game_loop()
+
+This updated code should rotate the Tetrimino counter-clockwise when the "Up" arrow key is pressed.
+
+**User**
+
+Please cancel the last update.
+
+**ChatGPT**
+
+I apologize for the confusion. Here's the updated code where the Tetrimino rotates counter-clockwise:
+
+python
+Copy code
+
+    import pygame
+    import random
+
+    # Initialize Pygame
+    pygame.init()
+
+    # Define constants
+    SCREEN_WIDTH = 800
+    SCREEN_HEIGHT = 600
+    GRID_SIZE = 30
+    GRID_WIDTH = 10
+    GRID_HEIGHT = 20
+
+    # Calculate the actual screen size based on the grid dimensions
+    SCREEN_SIZE = (GRID_WIDTH * GRID_SIZE, GRID_HEIGHT * GRID_SIZE)
+
+    # Define colors
+    BLACK = (0, 0, 0)
+    WHITE = (255, 255, 255)
+    RED = (255, 0, 0)
+    GREEN = (0, 255, 0)
+    BLUE = (0, 0, 255)
+
+    # Create the game window
+    screen = pygame.display.set_mode(SCREEN_SIZE)
+    pygame.display.set_caption("Tetris")
+
+    clock = pygame.time.Clock()
+
+    class Tetrimino:
+        def __init__(self):
+            self.shapes = [
+                [[1, 1, 1, 1]],
+                [[1, 1], [1, 1]],
+                [[1, 1, 1], [0, 1, 0]],
+                [[1, 1, 1], [1, 0, 0]],
+                [[1, 1, 1], [0, 0, 1]],
+                [[1, 1, 0], [0, 1, 1]],
+                [[0, 1, 1], [1, 1, 0]]
+            ]
+            self.shape = random.choice(self.shapes)
+            self.color = random.choice([RED, GREEN, BLUE])
+            self.x = (GRID_WIDTH - len(self.shape[0])) // 2
+            self.y = 0
+
+        def move_down(self):
+            self.y += 1
+
+        def move_left(self):
+            self.x -= 1
+
+        def move_right(self):
+            self.x += 1
+
+        def rotate(self):
+            self.shape = list(zip(*self.shape[::-1]))[::-1]  # Rotate the shape counter-clockwise
+
+        def draw(self, surface):
+            for i in range(len(self.shape)):
+                for j in range(len(self.shape[i])):
+                    if self.shape[i][j]:
+                        pygame.draw.rect(surface, self.color,
+                                        (self.x * GRID_SIZE + j * GRID_SIZE,
+                                        self.y * GRID_SIZE + i * GRID_SIZE,
+                                        GRID_SIZE, GRID_SIZE))
+
+
+    class GameGrid:
+        def __init__(self):
+            self.grid = [[BLACK] * GRID_WIDTH for _ in range(GRID_HEIGHT)]
+
+        def is_collision(self, tetrimino):
+            for i in range(len(tetrimino.shape)):
+                for j in range(len(tetrimino.shape[i])):
+                    if tetrimino.shape[i][j] and (
+                            tetrimino.x + j < 0 or tetrimino.x + j >= GRID_WIDTH or
+                            tetrimino.y + i >= GRID_HEIGHT or
+                            self.grid[tetrimino.y + i][tetrimino.x + j] != BLACK
+                    ):
+                        return True
+            return False
+
+        def merge_tetrimino(self, tetrimino):
+            for i in range(len(tetrimino.shape)):
+                for j in range(len(tetrimino.shape[i])):
+                    if tetrimino.shape[i][j]:
+                        self.grid[tetrimino.y + i][tetrimino.x + j] = tetrimino.color
+
+        def clear_rows(self):
+            full_rows = []
+            for i in range(GRID_HEIGHT):
+                if all(cell != BLACK for cell in self.grid[i]):
+                    full_rows.append(i)
+
+            for row in full_rows:
+                del self.grid[row]
+                self.grid.insert(0, [BLACK] * GRID_WIDTH)
+
+
+    def draw_grid(surface, grid):
+        for i in range(GRID_HEIGHT):
+            for j in range(GRID_WIDTH):
+                pygame.draw.rect(surface, grid[i][j],
+                                (j * GRID_SIZE, i * GRID_SIZE, GRID_SIZE, GRID_SIZE), 0)
+
+
+    def draw_game(surface, tetrimino, next_tetrimino, game_grid):
+        surface.fill(BLACK)
+        draw_grid(surface, game_grid.grid)
+        tetrimino.draw(surface)
+        next_tetrimino.draw(surface)
+        pygame.display.update()
+
+
+    def game_loop():
+        tetrimino = Tetrimino()
+        next_tetrimino = Tetrimino()
+        game_grid = GameGrid()
+
+        tetrimino_interval = 1000  # Initial interval between tetrimino movements in milliseconds
+        tetrimino_timer = pygame.USEREVENT + 1
+        pygame.time.set_timer(tetrimino_timer, tetrimino_interval)
+
+        keys_down = set()
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    return
+
+                if event.type == tetrimino_timer:
+                    tetrimino.move_down()
+                    if game_grid.is_collision(tetrimino):
+                        tetrimino.y -= 1
+                        game_grid.merge_tetrimino(tetrimino)
+                        game_grid.clear_rows()
+                        tetrimino = next_tetrimino
+                        next_tetrimino = Tetrimino()
+                        if game_grid.is_collision(next_tetrimino):
+                            print("Game Over")
+                            pygame.quit()
+                            return
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:
+                        keys_down.add(pygame.K_LEFT)
+                    elif event.key == pygame.K_RIGHT:
+                        keys_down.add(pygame.K_RIGHT)
+                    elif event.key == pygame.K_DOWN:
+                        keys_down.add(pygame.K_DOWN)
+                    elif event.key == pygame.K_UP:
+                        tetrimino.rotate()
+                        if game_grid.is_collision(tetrimino):
+                            tetrimino.rotate()
+                            tetrimino.rotate()
+                            tetrimino.rotate()
+
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_LEFT:
+                        keys_down.discard(pygame.K_LEFT)
+                    elif event.key == pygame.K_RIGHT:
+                        keys_down.discard(pygame.K_RIGHT)
+                    elif event.key == pygame.K_DOWN:
+                        keys_down.discard(pygame.K_DOWN)
+
+            if pygame.K_LEFT in keys_down:
+                tetrimino.move_left()
+                if game_grid.is_collision(tetrimino):
+                    tetrimino.move_right()
+
+            if pygame.K_RIGHT in keys_down:
+                tetrimino.move_right()
+                if game_grid.is_collision(tetrimino):
+                    tetrimino.move_left()
+
+            if pygame.K_DOWN in keys_down:
+                tetrimino.move_down()
+                if game_grid.is_collision(tetrimino):
+                    tetrimino.y -= 1
+                    game_grid.merge_tetrimino(tetrimino)
+                    tetrimino = next_tetrimino
+                    next_tetrimino = Tetrimino()
+                    if game_grid.is_collision(next_tetrimino):
+                        print("Game Over")
+                        pygame.quit()
+                        return
+
+            draw_game(screen, tetrimino, next_tetrimino, game_grid)
+            clock.tick(60)
+
+
+    # Run the game
+    game_loop()
+    
 This updated code should rotate the Tetrimino counter-clockwise when the "Up" arrow key is pressed.
 
 
