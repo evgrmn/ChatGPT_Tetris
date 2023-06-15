@@ -8,23 +8,23 @@ ${\color{red}Red}$
 
 <style>H1{color:Blue;}</style>
 
-<code>**ChatGPT** Certainly! Tetris is a classic puzzle video game that involves manipulating falling blocks known as Tetriminos to create complete horizontal lines without any gaps. Here's a description of a typical scenario in a game of Tetris:
+        <code>**ChatGPT** Certainly! Tetris is a classic puzzle video game that involves manipulating falling blocks known as Tetriminos to create complete horizontal lines without any gaps. Here's a description of a typical scenario in a game of Tetris:
 
-Game Start: The player begins the game with an empty grid, usually a rectangular playing field that is 10 units wide and 20 units tall. The game starts with a random Tetrimino, consisting of four connected blocks, falling from the top of the screen.
+        Game Start: The player begins the game with an empty grid, usually a rectangular playing field that is 10 units wide and 20 units tall. The game starts with a random Tetrimino, consisting of four connected blocks, falling from the top of the screen.
 
-Falling Tetriminos: The player can move and rotate the Tetrimino as it descends towards the bottom of the screen. The Tetrimino moves horizontally using the left and right arrow keys, and it can be rotated using the up arrow key. The player must strategically position and rotate the Tetriminos to fit them together and create solid horizontal lines.
+        Falling Tetriminos: The player can move and rotate the Tetrimino as it descends towards the bottom of the screen. The Tetrimino moves horizontally using the left and right arrow keys, and it can be rotated using the up arrow key. The player must strategically position and rotate the Tetriminos to fit them together and create solid horizontal lines.
 
-Clearing Lines: When a horizontal line is completely filled with blocks, it disappears, and any blocks above it will fall down to fill the gap. Clearing lines earns the player points, and the goal is to clear as many lines as possible to achieve a high score.
+        Clearing Lines: When a horizontal line is completely filled with blocks, it disappears, and any blocks above it will fall down to fill the gap. Clearing lines earns the player points, and the goal is to clear as many lines as possible to achieve a high score.
 
-Increasing Difficulty: As the game progresses, the Tetriminos fall faster and the pace of the game increases. This increase in speed challenges the player's reflexes and ability to think quickly to make decisions.
+        Increasing Difficulty: As the game progresses, the Tetriminos fall faster and the pace of the game increases. This increase in speed challenges the player's reflexes and ability to think quickly to make decisions.
 
-Game Over: The game continues until the stack of Tetriminos reaches the top of the playing field. If the player cannot successfully fit the falling Tetriminos into the available space, the game ends, and the player's score is displayed.
+        Game Over: The game continues until the stack of Tetriminos reaches the top of the playing field. If the player cannot successfully fit the falling Tetriminos into the available space, the game ends, and the player's score is displayed.
 
-Scoring: The player earns points for each line cleared. The more lines cleared simultaneously, the higher the score. Some versions of Tetris also award bonus points for performing special moves, such as clearing multiple lines with a single Tetrimino or clearing lines consecutively.
+        Scoring: The player earns points for each line cleared. The more lines cleared simultaneously, the higher the score. Some versions of Tetris also award bonus points for performing special moves, such as clearing multiple lines with a single Tetrimino or clearing lines consecutively.
 
-High Score: The player's highest score is often recorded, allowing them to strive for better results in subsequent playthroughs.
+        High Score: The player's highest score is often recorded, allowing them to strive for better results in subsequent playthroughs.
 
-The scenario of Tetris is straightforward yet challenging, requiring players to think strategically, react quickly, and make efficient use of the falling Tetriminos to achieve the highest score possible.</code>
+        The scenario of Tetris is straightforward yet challenging, requiring players to think strategically, react quickly, and make efficient use of the falling Tetriminos to achieve the highest score possible.</code>
 
 
 
