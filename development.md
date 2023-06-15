@@ -1548,8 +1548,6 @@ TypeError: Tetrimino.draw() takes 2 positional arguments but 4 were given
 
 Apologies for the oversight. It seems that the draw() method of the Tetrimino class was not updated with the correct number of arguments. Please modify the draw() method to only take the surface parameter. Here's the corrected code:
 
-    python
-    Copy code
     # Class to represent Tetriminos
     class Tetrimino:
         shapes = [
@@ -1790,9 +1788,6 @@ Perfect. Let's continue upgrading the code. Now the Tetrimino rotates clockwise.
 
 Certainly! To change the direction of rotation to counter-clockwise, we can modify the rotate() method of the Tetrimino class. Here's the updated code:
 
-python
-Copy code
-
     # Class to represent Tetriminos
     class Tetrimino:
         shapes = [
@@ -1832,19 +1827,18 @@ Copy code
                     if self.shape[row][col] == 1:
                         pygame.draw.rect(surface, BLUE, ((self.x + col) * CELL_SIZE, (self.y + row) * CELL_SIZE, CELL_SIZE, CELL_SIZE))
                         pygame.draw.rect(surface, BLACK, ((self.x + col) * CELL_SIZE, (self.y + row) * CELL_SIZE, CELL_SIZE, CELL_SIZE), 1)
-    With this modification, the Tetrimino will rotate in the counter-clockwise direction when the rotation occurs.
+
+With this modification, the Tetrimino will rotate in the counter-clockwise direction when the rotation occurs.
+
+**User**
+
+Insuccess. Still rotate clockwise.
+
+**ChatGPT**
+
+Apologies for the confusion. Let's correct the rotation direction to counter-clockwise. Here's the updated code:
 
 
-
-
-
-    User
-    Insuccess. Still rotate clockwise.
-    ChatGPT
-    Apologies for the confusion. Let's correct the rotation direction to counter-clockwise. Here's the updated code:
-
-    python
-    Copy code
     # Class to represent Tetriminos
     class Tetrimino:
         shapes = [
@@ -1895,9 +1889,6 @@ Perfect. Let's continue upgrading the code. When the Tetrimino collides the side
 
 Certainly! To handle collisions between the Tetrimino and the old Tetriminos from the sides, we can modify the collision detection logic in the game loop. Here's the updated code:
 
-python
-Copy code
-
     # Collision detection with the bottom or other Tetriminos
     if game_grid.is_collision(tetrimino):
         tetrimino.y -= 1  # Move the Tetrimino back up
@@ -1937,9 +1928,6 @@ Insuccess. In this variant the Tetrimino jumps one step up and overlaps the old 
 **ChatGPT**
 
 Apologies for the confusion. To handle collisions between the Tetrimino and the old Tetriminos from the sides correctly, we need to update the collision detection logic. Here's the corrected code:
-
-python
-Copy code
 
     # Collision detection with the bottom or other Tetriminos
     if game_grid.is_collision(tetrimino):
@@ -1983,8 +1971,6 @@ Insuccess. Correct as following: when the Tetrimino collides the side of the old
 
 Apologies for the confusion. To handle collisions between the Tetrimino and the old Tetriminos from the sides correctly, we can modify the collision detection logic. Here's the corrected code:
 
-python
-Copy code
 
     # Collision detection with the bottom or other Tetriminos
     if game_grid.is_collision(tetrimino):
@@ -2030,9 +2016,6 @@ Incorrect. If the Tetrimino collides with other Tetriminos on the sides, in this
 
 Apologies for the misunderstanding. To handle collisions between the Tetrimino and the old Tetriminos on the sides, where the sides of the old Tetriminos are considered like the side walls, we can update the collision detection logic. Here's the regenerated code:
 
-python
-Copy code
-
     # Collision detection with the bottom or other Tetriminos
     if game_grid.is_collision(tetrimino):
         tetrimino.y -= 1  # Move the Tetrimino back up
@@ -2072,9 +2055,6 @@ Please regenarate the whole code.
 **ChatGPT**
 
 Certainly! Here's the regenerated code that includes the desired behavior:
-
-python
-Copy code
 
     import pygame
     import random
@@ -2253,9 +2233,6 @@ Please make the grid 10 wide and 20 high.
 
 Apologies for the oversight. Here's the regenerated code with the grid adjusted to be 10 units wide and 20 units high:
 
-python
-Copy code
-
     import pygame
     import random
 
@@ -2433,9 +2410,6 @@ Please increase time interval to 1000 ms
 **ChatGPT**
 
 Certainly! Here's the updated code with the time interval increased to 1000 milliseconds (1 second):
-
-python
-Copy code
 
     import pygame
     import random
@@ -2618,9 +2592,6 @@ Perfect. Let's continue upgrading the code. Now the Tetrimino rotates clockwise.
 **ChatGPT**
 
 Certainly! Here's the updated code where the Tetrimino rotates counter-clockwise:
-
-python
-Copy code
 
     import pygame
     import random
@@ -2806,9 +2777,6 @@ Insuccess. Still rotates clockwise. Please correct.
 
 Apologies for the confusion. Here's the corrected code where the Tetrimino rotates counter-clockwise:
 
-python
-Copy code
-
     import pygame
     import random
 
@@ -2993,9 +2961,6 @@ Perfect. Let's continue upgrading the code. When I push the control button and d
 **ChatGPT**
 
 To handle repeated key presses when a key is held down, you can utilize the pygame.KEYUP event to track when a key is released. Here's the updated code that handles repeated key presses:
-
-python
-Copy code
 
     import pygame
     import random
@@ -3192,9 +3157,6 @@ Please increase repeated key presses interval to 250 ms.
 **ChatGPT**
 
 To increase the interval between repeated key presses, you can use a timer event to control the movement of the Tetrimino. Here's the updated code with the increased interval:
-
-python
-Copy code
 
     import pygame
     import random
@@ -3405,9 +3367,6 @@ Please cancel the last update.
 **ChatGPT**
 
 I apologize for the confusion. Here's the updated code where the Tetrimino rotates counter-clockwise:
-
-python
-Copy code
 
     import pygame
     import random
@@ -3789,9 +3748,6 @@ Generate this variant.
 
 Certainly! Here's the updated code where the Tetrimino rotates counter-clockwise:
 
-python
-Copy code
-
     import pygame
     import random
 
@@ -3997,9 +3953,6 @@ What is the time interval for repeated key presses?
 **ChatGPT**
 
 Apologies for the oversight. In the provided code, there is no specific implementation for repeated key presses. If you'd like to add a time interval for repeated key presses, we can modify the code as follows:
-
-python
-Copy code
 
     import pygame
     import random
@@ -4212,9 +4165,6 @@ Upgrade the code: change repeat_interval value to 100.
 2 / 2
 
 Certainly! Here's the updated code with the repeat_interval value changed to 100 milliseconds:
-
-python
-Copy code
 
     import pygame
     import random
@@ -4442,9 +4392,6 @@ Upgrade the code: no key repeating for rotation of the Tetrimino.
 
 Certainly! Here's the updated code with no key repeating for the rotation of the Tetrimino:
 
-python
-Copy code
-
     import pygame
     import random
 
@@ -4629,9 +4576,6 @@ Upgrade the code. Please add key repeating to the control keys with interval = 1
 **ChatGPT**
 
 Certainly! Here's the updated code with key repeating for the control keys (left, right, and down) but not for the rotation key:
-
-python
-Copy code
 
     import pygame
     import random
@@ -4853,9 +4797,6 @@ The repeating function for control keys (left, right, and down) does not work. P
 **ChatGPT**
 
 I apologize for the oversight. Let me correct the code for you:
-
-python
-Copy code
 
     import pygame
     import random
@@ -5277,9 +5218,6 @@ Please generate this code:
 2 / 2
 
 Here's the generated code:
-
-python
-Copy code
 
     import pygame
     import random
@@ -5710,9 +5648,6 @@ Yes, add a new control key using the Space button. When I press the Space button
 
 Sure! I've made the modifications to the code to implement the new control key using the Space button. When the Space button is pressed, the tetrimino will descend rapidly with an interval of 100 milliseconds, and the Left, Right, Up, and Down controls will be disabled during this rapid descent. Here's the updated code:
 
-python
-Copy code
-
     import pygame
     import random
 
@@ -6141,9 +6076,6 @@ Add to the code below a new control key using the Space button. Once I press the
 
 Here's the updated code with the additional control for the Space button as you described:
 
-python
-Copy code
-
     import pygame
     import random
 
@@ -6375,9 +6307,6 @@ Incorrect realization of Space button. Once I pushed the Space button, than rapi
 
 Apologies for the confusion. Here's the corrected code to implement the desired behavior of the Space button:
 
-python
-Copy code
-
     import pygame
     import random
 
@@ -6607,9 +6536,6 @@ Insuccess. Now when I press the Space button, than nothing happens. The correct 
 
 I apologize for the misunderstanding. To implement the behavior you described, where pressing the Space button triggers rapid descent and releasing the Space button does not immediately stop the descent, but allows it to continue until collision, you can modify the code as follows:
 
-python
-Copy code
-
     import pygame
     import random
 
@@ -6831,9 +6757,6 @@ The space control key does not work. Let me remind you. Pushing Space control st
 **ChatGPT**
 
 Apologies for the confusion. I've updated the code to implement the desired functionality. Please try the following version:
-
-python
-Copy code
 
     import pygame
     import random
@@ -7290,9 +7213,6 @@ Using the code below, please enhance the game interface adding four-cell space t
 
 To enhance the game interface by adding a four-cell space to the right of the game grid, you'll need to modify the draw_grid and draw_game functions. Here's an updated version of the code:
 
-python
-Copy code
-
     def draw_grid(surface, grid):
         for i in range(GRID_HEIGHT):
             for j in range(GRID_WIDTH):
@@ -7327,9 +7247,6 @@ Please generate the whole code.
 **ChatGPT**
 
 Certainly! Here's the complete code with the enhanced game interface, including the four-cell space to the right of the game grid:
-
-python
-Copy code
 
     import pygame
     import random
@@ -7564,9 +7481,6 @@ Let's call the space to the right of the game grid interface field. So, on the t
 
 To add the "Level" label on top of the interface field, you can modify the draw_game function. Here's the updated code:
 
-python
-Copy code
-
     def draw_game(surface, tetrimino, next_tetrimino, game_grid, level):
         surface.fill(BLACK)
         draw_grid(surface, game_grid.grid)
@@ -7585,9 +7499,6 @@ Copy code
 
 Now, you can pass the level value to the draw_game function when calling it in the game loop. For example:
 
-python
-Copy code
-
     level = 1
     draw_game(screen, tetrimino, next_tetrimino, game_grid, level)
 
@@ -7600,9 +7511,6 @@ horizontally align Level to the center of the interface field
 **ChatGPT**
 
 To horizontally align the "Level" label to the center of the interface field, you can modify the draw_game function as follows:
-
-python
-Copy code
 
     def draw_game(surface, tetrimino, next_tetrimino, game_grid, level):
         surface.fill(BLACK)
@@ -7625,9 +7533,6 @@ In this updated code, the level_text_rect variable is created to store the recta
 
 Now, when calling the draw_game function in the game loop, pass the level value as before:
 
-python
-Copy code
-
     level = 1
     draw_game(screen, tetrimino, next_tetrimino, game_grid, level)
 
@@ -7640,9 +7545,6 @@ put the level number to the next string under the word Level
 **ChatGPT**
 
 To display the level number below the "Level" label in the interface field, you can modify the draw_game function as follows:
-
-python
-Copy code
 
     def draw_game(surface, tetrimino, next_tetrimino, game_grid, level):
         surface.fill(BLACK)
@@ -7670,9 +7572,6 @@ In this updated code, we add another surface.blit() call to display the level nu
 
 Make sure to pass the level value when calling the draw_game function in the game loop:
 
-python
-Copy code
-
     level = 1
     draw_game(screen, tetrimino, next_tetrimino, game_grid, level)
 
@@ -7685,9 +7584,6 @@ Put the both strings two strings lower
 **ChatGPT**
 
 To display the "Level" label and level number two strings lower in the interface field, you can update the level_label_rect and level_number_rect positions in the draw_game function. Here's the modified code:
-
-python
-Copy code
 
     def draw_game(surface, tetrimino, next_tetrimino, game_grid, level):
         surface.fill(BLACK)
@@ -7715,9 +7611,6 @@ In this updated code, we modify the level_label_rect position by multiplying GRI
 
 Don't forget to pass the level value when calling the draw_game function in the game loop:
 
-python
-Copy code
-
     level = 1
     draw_game(screen, tetrimino, next_tetrimino, game_grid, level)
 
@@ -7730,9 +7623,6 @@ move the new Tetrimino to be spawned from the game grid to the top of the interf
 **ChatGPT**
 
 To move the newly spawned tetrimino from the game grid to the top of the interface field, we need to update the Tetrimino class and the draw_game function. Here's the modified code:
-
-python
-Copy code
 
     class Tetrimino:
         # ...
@@ -7791,9 +7681,6 @@ Not above the game grid but at the top of the interface field. Please correct
 
 Apologies for the confusion. To place the newly spawned tetrimino at the top of the interface field, we need to adjust the y position in the Tetrimino class and the draw_game function. Here's the modified code:
 
-python
-Copy code
-
     class Tetrimino:
         # ...
 
@@ -7849,9 +7736,6 @@ You must change the 'x' position to move the new tetrimino to the interface fiel
 **ChatGPT**
 
 Apologies for the misunderstanding. To move the new tetrimino to the interface field, we need to update the x position of the Tetrimino class and the draw_game function. Here's the modified code:
-
-python
-Copy code
 
     class Tetrimino:
         # ...
@@ -7909,9 +7793,6 @@ Please upgrade next_tetrimino.x = GRID_WIDTH row putting next_tetrimino.x in the
 
 Apologies for the confusion. To center the next_tetrimino in the interface field based on its shape, we need to calculate the appropriate x position. Here's the modified code:
 
-python
-Copy code
-
     class Tetrimino:
         # ...
 
@@ -7965,9 +7846,6 @@ User
 Add one space row behind the level number in the interface field. Then add a new row with the word 'Score:' 
 ChatGPT
 To add a space row behind the level number in the interface field and include a new row with the word 'Score:', you can modify the draw_game function as follows:
-
-python
-Copy code
 
     def draw_game(surface, tetrimino, next_tetrimino, game_grid, level, score):
         surface.fill(BLACK)
@@ -8302,9 +8180,6 @@ Each cleared line must increment the variable 'score' by one point.
 
 To increment the score variable by one point for each cleared line, you need to modify the GameGrid class's clear_rows method. Update the code as follows:
 
-python
-Copy code
-
     class GameGrid:
         def __init__(self):
             self.grid = [[BLACK] * GRID_WIDTH for _ in range(GRID_HEIGHT)]
@@ -8339,9 +8214,6 @@ change the row 'score += num_cleared_rows' into 'score += num_cleared_rows * num
 **ChatGPT**
 
 To update the code as per your requirements, modify the clear_rows method in the GameGrid class as follows:
-
-python
-Copy code
 
     class GameGrid:
         def __init__(self):
@@ -8378,9 +8250,6 @@ Do not close the application when the game is over. Just put the words 'GAME OVE
 **ChatGPT**
 
 To implement the changes you requested, modify the game_loop function as follows:
-
-python
-Copy code
 
     def game_loop():
         # ...
@@ -8428,9 +8297,6 @@ No restart from the beginning: the application quit when I press any key. Please
 
 Apologies for the misunderstanding. To close the application when any key is pressed after the game is over, modify the game_loop function as follows:
 
-python
-Copy code
-
     def game_loop():
         # ...
 
@@ -8477,9 +8343,6 @@ Do not close the application when the game is over. Just put the words 'GAME OVE
 **ChatGPT**
 
 Apologies for the confusion. To restart the game from the beginning when any key is pressed after the game is over, modify the game_loop function as follows:
-
-python
-Copy code
 
     def game_loop():
         level = 1
@@ -8540,17 +8403,14 @@ To display "GAME OVER" in the center of the game grid, ignoring the width of the
 
 Remove the following line:
 
-python
-Copy code
-
     SCREEN_SIZE = (GRID_WIDTH * GRID_SIZE + GRID_SIZE * 4, GRID_HEIGHT * GRID_SIZE)
-    Modify the following lines in the draw_game function:
-    python
-    Copy code
+
+Modify the following lines in the draw_game function:
+
     game_over_rect = game_over_text.get_rect(center=(GRID_WIDTH * GRID_SIZE // 2, GRID_HEIGHT * GRID_SIZE // 2))
-    Modify the game_loop function as follows:
-    python
-    Copy code
+
+Modify the game_loop function as follows:
+
     def game_loop():
         level = 1
         score = 0
@@ -8610,9 +8470,6 @@ To increment the level variable by 1 and decrement the tetrimino_interval by 100
 
 Modify the GameGrid class to keep track of the total number of cleared lines:
 
-python
-Copy code
-
     class GameGrid:
         def __init__(self):
             self.grid = [[BLACK] * GRID_WIDTH for _ in range(GRID_HEIGHT)]
@@ -8630,9 +8487,6 @@ Copy code
                 self.cleared_lines += 1
 
 Modify the game_loop function as follows:
-
-python
-Copy code
 
     def game_loop():
         level = 1
@@ -8691,17 +8545,11 @@ To add a new control to pause the game by pressing the "Esc" key, you can make t
 
 Declare a new boolean variable called game_paused at the beginning of the game_loop function and initialize it to False:
 
-python
-Copy code
-
     def game_loop():
         # ...
         game_paused = False
 
 Add a new event handler for the "Esc" key press event:
-
-python
-Copy code
 
     while True:
         for event in pygame.event.get():
@@ -8713,9 +8561,6 @@ Copy code
             # Handle other event types and conditions
 
 Modify the main game loop to skip the game logic and rendering when the game is paused:
-
-python
-Copy code
 
     while True:
         for event in pygame.event.get():
@@ -9697,8 +9542,7 @@ Please remember the code below:
 I have saved the code you provided. Let me know if you have any specific questions or if there's anything else I can assist you with!
 
 **User**
-    if lines >= level * level_increment:
-        level += 1
+
 In the code find the rows:         
         
     if lines >= level * level_increment:
@@ -10646,7 +10490,7 @@ Certainly! Adding sound effects to the code can enhance the gaming experience. H
         game_grid = GameGrid()
         tetrimino = Tetrimino()
         next_tetrimino = Tetrimino()
-        
+
 In this updated version, I've added a dictionary called SOUND_EFFECTS that stores the sound effects. You need to provide the sound files (e.g., 'move.wav', 'rotate.wav', etc.) and make sure they are in the same directory as the Python script.
 
 Each time a sound effect needs to be played, such as when a tetrimino moves, rotates, collides, a line is cleared, or the game is over, the corresponding sound effect is played using SOUND_EFFECTS['sound_name'].play(). For example, SOUND_EFFECTS['move'].play() will play the "move" sound effect.
