@@ -6,6 +6,8 @@
 
 $${\color{red}Red}$$
 
+<style>H1{color:Blue;}</style>
+
 ![#3399CC]**ChatGPT** Certainly! Tetris is a classic puzzle video game that involves manipulating falling blocks known as Tetriminos to create complete horizontal lines without any gaps. Here's a description of a typical scenario in a game of Tetris:
 
 ![#3399CC]Game Start: The player begins the game with an empty grid, usually a rectangular playing field that is 10 units wide and 20 units tall. The game starts with a random Tetrimino, consisting of four connected blocks, falling from the top of the screen.
