@@ -24,7 +24,7 @@ Scoring: The player earns points for each line cleared. The more lines cleared s
 
 High Score: The player's highest score is often recorded, allowing them to strive for better results in subsequent playthroughs.
 
-The scenario of Tetris is straightforward yet challenging, requiring players to think strategically, react quickly, and make efficient use of the falling Tetriminos to achieve the highest score possible.<code>
+The scenario of Tetris is straightforward yet challenging, requiring players to think strategically, react quickly, and make efficient use of the falling Tetriminos to achieve the highest score possible.</code>
 
 
 
