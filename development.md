@@ -28,7 +28,7 @@ The scenario of Tetris is straightforward yet challenging, requiring players to 
 
 **User**
 
-- Please define developing stages for a programmer to create Tetris game.
+*Please define developing stages for a programmer to create Tetris game.*
 
 **ChatGPT**
 
