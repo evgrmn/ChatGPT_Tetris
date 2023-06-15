@@ -2,6 +2,7 @@
 #https://chat.openai.com/share/5f721367-80e8-4253-8610-1a8f526bab0c
 
 
+````diff
 + **User** Please describe scenario of Tetris game. +
 
 ![#3399CC]**ChatGPT** Certainly! Tetris is a classic puzzle video game that involves manipulating falling blocks known as Tetriminos to create complete horizontal lines without any gaps. Here's a description of a typical scenario in a game of Tetris:
