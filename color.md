@@ -3,4 +3,7 @@
 - this text is highlighted in red
 ```
 
-<stile>Text</style>
+<style>Text</style>
+
+
+<code style="color : aqua">Text</code>
