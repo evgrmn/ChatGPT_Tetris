@@ -2,60 +2,53 @@
 #https://chat.openai.com/share/5f721367-80e8-4253-8610-1a8f526bab0c
 
 
-<code style="color : aqua">**User** Please describe scenario of Tetris game.</code>
-
-${\color{red}Red}$
-
-<style>H1{color:Blue;}</style>
+**User** Please describe scenario of Tetris game.
 
 > **ChatGPT** Certainly! Tetris is a classic puzzle video game that involves manipulating falling blocks known as Tetriminos to create complete horizontal lines without any gaps. Here's a description of a typical scenario in a game of Tetris:
 
 > Game Start: The player begins the game with an empty grid, usually a rectangular playing field that is 10 units wide and 20 units tall. The game starts with a random Tetrimino, consisting of four connected blocks, falling from the top of the screen.
 
-Falling Tetriminos: The player can move and rotate the Tetrimino as it descends towards the bottom of the screen. The Tetrimino moves horizontally using the left and right arrow keys, and it can be rotated using the up arrow key. The player must strategically position and rotate the Tetriminos to fit them together and create solid horizontal lines.
+> Falling Tetriminos: The player can move and rotate the Tetrimino as it descends towards the bottom of the screen. The Tetrimino moves horizontally using the left and right arrow keys, and it can be rotated using the up arrow key. The player must strategically position and rotate the Tetriminos to fit them together and create solid horizontal lines.
 
-Clearing Lines: When a horizontal line is completely filled with blocks, it disappears, and any blocks above it will fall down to fill the gap. Clearing lines earns the player points, and the goal is to clear as many lines as possible to achieve a high score.
+> Clearing Lines: When a horizontal line is completely filled with blocks, it disappears, and any blocks above it will fall down to fill the gap. Clearing lines earns the player points, and the goal is to clear as many lines as possible to achieve a high score.
 
-Increasing Difficulty: As the game progresses, the Tetriminos fall faster and the pace of the game increases. This increase in speed challenges the player's reflexes and ability to think quickly to make decisions.
+> Increasing Difficulty: As the game progresses, the Tetriminos fall faster and the pace of the game increases. This increase in speed challenges the player's reflexes and ability to think quickly to make decisions.
 
-Game Over: The game continues until the stack of Tetriminos reaches the top of the playing field. If the player cannot successfully fit the falling Tetriminos into the available space, the game ends, and the player's score is displayed.
+> Game Over: The game continues until the stack of Tetriminos reaches the top of the playing field. If the player cannot successfully fit the falling Tetriminos into the available space, the game ends, and the player's score is displayed.
 
-Scoring: The player earns points for each line cleared. The more lines cleared simultaneously, the higher the score. Some versions of Tetris also award bonus points for performing special moves, such as clearing multiple lines with a single Tetrimino or clearing lines consecutively.
+> Scoring: The player earns points for each line cleared. The more lines cleared simultaneously, the higher the score. Some versions of Tetris also award bonus points for performing special moves, such as clearing multiple lines with a single Tetrimino or clearing lines consecutively.
 
-High Score: The player's highest score is often recorded, allowing them to strive for better results in subsequent playthroughs.
+> High Score: The player's highest score is often recorded, allowing them to strive for better results in subsequent playthroughs.
 
-The scenario of Tetris is straightforward yet challenging, requiring players to think strategically, react quickly, and make efficient use of the falling Tetriminos to achieve the highest score possible.
-
-
+> The scenario of Tetris is straightforward yet challenging, requiring players to think strategically, react quickly, and make efficient use of the falling Tetriminos to achieve the highest score possible.
 
 
+**User**User Please define developing stages for a programmer to create Tetris game.
 
-![#CC9933]**User**User Please define developing stages for a programmer to create Tetris game.
+> **ChatGPT**
 
-![#3399CC]**ChatGPT**
+> 2 / 2
 
-2 / 2
+> Developing a Tetris game typically involves several stages and tasks. Here's a breakdown of the key stages involved in creating a Tetris game:
 
-Developing a Tetris game typically involves several stages and tasks. Here's a breakdown of the key stages involved in creating a Tetris game:
+> Game Design and Planning:
 
-Game Design and Planning:
-
-Define the game mechanics and rules, including how the Tetriminos move, rotate, and interact with the game grid.
+> Define the game mechanics and rules, including how the Tetriminos move, rotate, and interact with the game grid.
 Determine the visual style, sound effects, and user interface elements.
 Plan the different game states, such as the start screen, gameplay, pause menu, game over screen, etc.
 Environment Setup:
 
-Choose a programming language and development framework that suits your needs.
+> Choose a programming language and development framework that suits your needs.
 Set up the development environment, including installing necessary tools and libraries.
 Game Structure and Components:
 
-Implement the game loop, which handles the continuous updating and rendering of the game elements.
+> Implement the game loop, which handles the continuous updating and rendering of the game elements.
 Create the game grid, which represents the playfield and keeps track of the positions of the Tetriminos.
 Develop classes or data structures to represent the Tetriminos, including their shapes, rotation, and movement logic.
 Implement collision detection to ensure that Tetriminos interact correctly with the game grid and other Tetriminos.
 User Input Handling:
 
-Capture and process user input, such as keyboard or touchscreen events, to control the movement and rotation of the Tetriminos.
+> Capture and process user input, such as keyboard or touchscreen events, to control the movement and rotation of the Tetriminos.
 Implement controls for pausing, restarting, or exiting the game.
 Graphics and Visuals:
 
@@ -156,38 +149,40 @@ Certainly! Let's start by creating the game loop and implementing a class to rep
 
 python
 Copy code
-import time
 
-# Define the dimensions of the game grid
-GRID_WIDTH = 10
-GRID_HEIGHT = 20
+    import time
 
-# Class to represent the game grid
-class GameGrid:
-    def __init__(self):
-        self.grid = [[0] * GRID_WIDTH for _ in range(GRID_HEIGHT)]
+    # Define the dimensions of the game grid
+    GRID_WIDTH = 10
+    GRID_HEIGHT = 20
 
-    def display(self):
-        for row in self.grid:
-            line = ''.join(str(cell) for cell in row)
-            print(line)
+    # Class to represent the game grid
+    class GameGrid:
+        def __init__(self):
+            self.grid = [[0] * GRID_WIDTH for _ in range(GRID_HEIGHT)]
 
-# Game loop
-def game_loop():
-    game_grid = GameGrid()
+        def display(self):
+            for row in self.grid:
+                line = ''.join(str(cell) for cell in row)
+                print(line)
 
-    # Main game loop
-    while True:
-        # Update game logic
+    # Game loop
+    def game_loop():
+        game_grid = GameGrid()
 
-        # Render game grid
-        game_grid.display()
+        # Main game loop
+        while True:
+            # Update game logic
 
-        # Delay to control the game speed (adjust as needed)
-        time.sleep(0.2)
+            # Render game grid
+            game_grid.display()
 
-if __name__ == "__main__":
-    game_loop()
+            # Delay to control the game speed (adjust as needed)
+            time.sleep(0.2)
+
+    if __name__ == "__main__":
+        game_loop()
+        
 In this code, we first define the dimensions of the game grid (10 columns by 20 rows) as constants. Then, we create a GameGrid class that initializes an empty grid using a nested list.
 
 The display method of the GameGrid class prints the current state of the grid on the console. Each cell in the grid is represented by a number (0 for an empty cell).
