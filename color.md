@@ -6,4 +6,4 @@
 <style>Text</style>
 
 
-<code style="color : aqua">Text</code>
+<code>Text</code>
