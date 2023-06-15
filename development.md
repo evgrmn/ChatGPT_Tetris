@@ -4,7 +4,7 @@
 
 <code style="color : aqua">**User** Please describe scenario of Tetris game.</code>
 
-$${\color{red}Red}$$
+${\color{red}Red}$
 
 <style>H1{color:Blue;}</style>
 
