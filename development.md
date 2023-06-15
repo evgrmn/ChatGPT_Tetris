@@ -4,7 +4,7 @@
 
 **User**
 
-Please describe scenario of Tetris game.
+*Please describe scenario of Tetris game.*
 
 **ChatGPT**
 
@@ -89,7 +89,7 @@ It's important to note that the actual development process may vary depending on
 
 **User**
 
-Can you create Tetris game in Python according to the scenario and the developing stages given?
+*Can you create Tetris game in Python according to the scenario and the developing stages given?*
 
 
 **ChatGPT**
@@ -145,7 +145,7 @@ You can find various resources and tutorials online that provide step-by-step in
 
 **User**
 
-Start programming in Python to create Tetris game. Make Tetris game loop to handle continuous updates and rendering. Implement a class or data structure to represent the game grid.
+*Start programming in Python to create Tetris game. Make Tetris game loop to handle continuous updates and rendering. Implement a class or data structure to represent the game grid.*
 
 **ChatGPT**
 
