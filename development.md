@@ -25,9 +25,9 @@
 
 **User**User Please define developing stages for a programmer to create Tetris game.
 
-```
 **ChatGPT**
 
+```
 2 / 2
 
 Developing a Tetris game typically involves several stages and tasks. Here's a breakdown of the key stages involved in creating a Tetris game:
