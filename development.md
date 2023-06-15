@@ -88,7 +88,8 @@ It's important to note that the actual development process may vary depending on
 
 User
 Can you create Tetris game in Python according to the scenario and the developing stages given?
-ChatGPT
+
+```ChatGPT
 Certainly! I can provide you with an example implementation of a Tetris game in Python. However, please note that the complete code for a Tetris game may be quite lengthy and cannot be included in a single response. I will provide you with an outline of the key components and stages involved. You can use this outline as a starting point and implement the various components in Python according to your specific needs.
 
 Here's a simplified outline of the stages involved in creating a Tetris game in Python:
@@ -136,7 +137,7 @@ Deployment:
 Package the game files and distribute the game to players.
 Please note that this outline provides a general structure, and the specific implementation details may vary based on your chosen graphics and audio libraries, as well as your personal programming style and preferences.
 
-You can find various resources and tutorials online that provide step-by-step instructions and example code for creating a Tetris game in Python. These resources can guide you through the implementation of each stage in more detail.
+You can find various resources and tutorials online that provide step-by-step instructions and example code for creating a Tetris game in Python. These resources can guide you through the implementation of each stage in more detail.```
 
 
 
@@ -182,7 +183,7 @@ Copy code
 
     if __name__ == "__main__":
         game_loop()
-        
+
 In this code, we first define the dimensions of the game grid (10 columns by 20 rows) as constants. Then, we create a GameGrid class that initializes an empty grid using a nested list.
 
 The display method of the GameGrid class prints the current state of the grid on the console. Each cell in the grid is represented by a number (0 for an empty cell).
