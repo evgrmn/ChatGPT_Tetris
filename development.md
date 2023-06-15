@@ -26,11 +26,9 @@ High Score: The player's highest score is often recorded, allowing them to striv
 
 The scenario of Tetris is straightforward yet challenging, requiring players to think strategically, react quickly, and make efficient use of the falling Tetriminos to achieve the highest score possible.
 
-***
-
 **User**
 
-User Please define developing stages for a programmer to create Tetris game.
+Please define developing stages for a programmer to create Tetris game.
 
 **ChatGPT**
 
@@ -270,7 +268,7 @@ Certainly! Let's upgrade the code to utilize the Pygame library for graphics ren
 
     if __name__ == "__main__":
         game_loop()
-        
+
 In this code, we import the Pygame library and define the dimensions of the game grid, cell size, and window size.
 
 We also define some colors for the grid cells, including black (BLACK), white (WHITE), blue (BLUE), and red (RED). You can customize these colors to fit your desired visual style.
