@@ -14,13 +14,13 @@ Of particular interest is the development.md file, which contains the history of
 
 2. It is recommended to use a virtual environment
 
-> python -m venv venv
-> source venv/bin/activate
+- python -m venv venv
+- source venv/bin/activate
 
 3. Install additional pygame package
 
-> pip install pygame
+- pip install pygame
 
 ## Game launch
 
-> python tetris.py
+- python tetris.py
