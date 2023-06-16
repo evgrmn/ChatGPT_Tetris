@@ -10,8 +10,6 @@ It should be added that not all code was made by AI. Sometimes patience ran out 
 
 Of particular interest is the [development.md](https://github.com/evgrmn/ChatGPT_Tetris/blob/master/development.md) file, which contains the history of interaction with ChatGPT.
 
-![alt text](https://github.com/evgrmn/ChatGPT_Tetris/blob/master/pic.png?raw=true)
-
 <p align="center">
     <img src="https://github.com/evgrmn/ChatGPT_Tetris/blob/master/pic.png">
 </p>
