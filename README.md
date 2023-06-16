@@ -12,6 +12,10 @@ Of particular interest is the [development.md](https://github.com/evgrmn/ChatGPT
 
 ![alt text](https://github.com/evgrmn/ChatGPT_Tetris/blob/master/pic.png?raw=true)
 
+<p align="center">
+    <img src="https://github.com/evgrmn/ChatGPT_Tetris/blob/master/pic.png">
+</p>
+
 ## Installation on Linux
 
 1. Download files
