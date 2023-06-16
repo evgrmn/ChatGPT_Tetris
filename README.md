@@ -17,6 +17,7 @@ Of particular interest is the [development.md](https://github.com/evgrmn/ChatGPT
 2. It is recommended to use a virtual environment
 
 <code>python -m venv venv</code>
+
 <code>source venv/bin/activate</code>
 
 3. Install additional pygame package
