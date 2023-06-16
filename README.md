@@ -2,6 +2,8 @@
 
 ![](https://badgen.net/badge/Python/3.10/blue) ![](https://badgen.net/badge/Pygame/2.4.0/gray)
 
+![alt text](https://github.com/evgrmn/ChatGPT_Tetris/blob/master/pic.png?raw=true)
+
 The goal of this small project was to achieve a debugged application using ChatGPT. It was assumed in advance that the development of the project is carried out without any knowledge in the field of programming. The developer is not a programmer, but only instructs ChatGPT in simple writing, adding game functionality and fixing bugs.
 
 It took patience and a day of work to complete the task, and as a result, we can conclude that ChatGPT cannot replace a programmer. ChatGPT does not know how to evaluate and test its code. ChatGPT is not a developer, ChatGPT is only a tool in the developer's hands.
@@ -26,4 +28,4 @@ Of particular interest is the [development.md](https://github.com/evgrmn/ChatGPT
 
 ## Game launch
 
-- python tetris.py
+<code>python tetris.py</code>
