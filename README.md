@@ -20,7 +20,7 @@ Of particular interest is the [development.md](https://github.com/evgrmn/ChatGPT
 
 <code>source venv/bin/activate</code>
 
-3. Install additional pygame package
+3. Install additional <code>pygame</code> package
 
 <code>pip install pygame</code>
 
